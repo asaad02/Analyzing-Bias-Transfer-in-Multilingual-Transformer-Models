@@ -1,75 +1,99 @@
-# COMP550-Project
-Analyzing Bias Transfer in Multilingual Transformer Models Using the Canadian and Nunavut Hansard Corpora
+# COMP550-Project: Analyzing Bias Transfer in Multilingual Transformer Models
 
-# Project Outline: Training and Analyzing Models for Cross-Language Bias and Knowledge Transfer
+This project explores how biases from dominant languages (e.g., English) transfer to underrepresented languages (e.g., Inuktitut) in multilingual transformer models. Using the Canadian and Nunavut Hansard corpora, we aim to analyze cross-linguistic bias and knowledge transfer, providing insights into the ethical development of multilingual NLP systems.
 
-## 1. Model Training Setup
+---
 
-### Model 1: Canadian Hansard Model (Excluding Nunavut Proceedings)
-- **Training Data:** Full corpus of the Canadian Hansard, excluding any content related to Nunavut, covering a similar time span to the Nunavut Hansard for direct comparison.
-- **Objective:** Establish the baseline for English-language embeddings and analyze how Canadian legislative language reflects cultural and political norms.
+## Project Objectives
 
-### Model 2: Nunavut Hansard Model
-- **Training Data:** Full corpus of the Nunavut Hansard to create embeddings reflective of legislative discussions that include Indigenous perspectives and cultural nuances.
-- **Objective:** Understand how the Inuktitut language represents cultural and political terms when trained independently.
+1. **Bias Analysis**: Investigate whether biases inherent in English-language datasets influence Inuktitut representations in multilingual models.
+2. **Embedding Comparisons**: Analyze and compare word embeddings across unilingual and multilingual models to detect bias transfer and semantic shifts.
+3. **Ethical NLP Development**: Provide recommendations for fairer representation of low-resource languages in multilingual NLP systems.
 
-### Model 3: Multilingual Model (Canadian Hansard + Underrepresented Nunavut Hansard)
-- **Training Data:** Combine the Canadian Hansard (overrepresented) with the Nunavut Hansard (underrepresented), sampling aligned spans of time to maintain temporal consistency.
-- **Objective:** Investigate cross-linguistic influences, particularly how biases in the overrepresented English dataset might affect embeddings and language representation in the underrepresented Inuktitut corpus.
+---
 
-## 2. Model Architecture and Hyperparameters
+## Project Outline
 
-- **Consistent Architecture:** Use a transformer architecture like BERT or a custom implementation with the same number of layers, attention heads, and hidden dimensions for all models.
-- **Hyperparameters:**
-  - Learning Rate: Start with a common rate, such as 2e-5.
-  - Batch Size: Maintain consistency (e.g., 32).
-  - Training Epochs: Train each model for an equivalent number of epochs (e.g., 10), with checkpoints to monitor overfitting.
-- **Tokenizer Customization:** Ensure the tokenizer can handle the unique morphological structure of Inuktitut alongside English.
+### 1. Model Training Setup
 
-## 3. Data Preprocessing
+- **Model 1: Canadian Hansard Model**  
+  - **Data**: Full Canadian Hansard corpus (excluding Nunavut-related content).
+  - **Purpose**: Establish a baseline for English-language embeddings and biases.
 
-- **Text Cleaning and Tokenization:** Uniformly clean and tokenize text from all corpora to standardize training inputs. Handle unique characters and structures for Inuktitut, especially if syllabic writing is present.
-- **Time Span Sampling:** Sample data from equivalent periods across both corpora to match the temporal scope and ensure alignment in content and context.
+- **Model 2: Nunavut Hansard Model**  
+  - **Data**: Full Nunavut Hansard corpus (aligned with Canadian Hansard).
+  - **Purpose**: Capture embeddings reflective of Inuktitut cultural and political nuances.
 
-## 4. Training Process
+- **Model 3: Multilingual Model (Overrepresented)**  
+  - **Data**: Combined Canadian (80%) and Nunavut (20%) Hansard datasets.  
+  - **Purpose**: Simulate real-world multilingual model conditions and analyze cross-linguistic bias transfer.
 
-- **Train Each Model:** Train each model separately using the same infrastructure (e.g., GPUs/TPUs) for consistency. Implement early stopping or validation checks to avoid overfitting.
-- **Multilingual Training Strategy:** For the multilingual model, set proportions to ensure that the Canadian Hansard is overrepresented (e.g., 80%) while maintaining a 20% representation of the Nunavut Hansard.
+- **Model 4: Multilingual Model (Balanced)**  
+  - **Data**: Equal proportions (50/50) of Canadian and Nunavut Hansard datasets.  
+  - **Purpose**: Assess whether balanced data representation mitigates bias transfer.
 
-## 5. Embedding Analysis
+---
 
-- **Word and Phrase Selection:** Select culturally significant words and phrases (e.g., “leader,” “community,” “tradition,” “elder”) to extract embeddings.
-- **Embedding Space Comparison:**
-  - Use cosine similarity to compare embeddings of the selected words across the models.
-  - Apply t-SNE or PCA for visualization to identify clustering patterns and semantic shifts.
+### 2. Methodology
 
-## 6. Cross-Language Bias and Knowledge Transfer Evaluation
+#### Data Preprocessing
+- Clean and tokenize text while handling Inuktitut's unique morphological structure.
+- Align data by sampling equivalent time spans to control for historical and temporal effects.
 
-- **Bias Transfer Indicators:**
-  - Analyze whether words associated with biases in the Canadian Hansard model shift in representation when compared to the Nunavut Hansard model.
-  - Check if embeddings for terms that may carry Western-centric or gendered biases in English maintain those associations in Inuktitut within the multilingual model.
-- **Semantic Integrity:** Assess whether culturally specific terms in the Nunavut Hansard model maintain their positions in the multilingual model or shift closer to English-biased terms.
+#### Training
+- Use a consistent transformer architecture (e.g., RoBERTa DistilBERT, TinyBERT) across all models.
+- Fine-tune models to ensure embeddings reflect the unique properties of the training datasets.
+- Implement early stopping and validation checks to prevent overfitting.
 
-## 7. Visualization and Quantitative Analysis
+#### Embedding Analysis
+- Extract embeddings for culturally significant terms (e.g., "elder," "community," "tradition").
+- Compare embedding spaces using metrics like cosine similarity and dimensionality reduction techniques (t-SNE, PCA).
 
-- **Clustering and Embedding Overlaps:** Visualize embeddings to show relationships between culturally important terms in each model.
-- **Embedding Distance Metrics:** Quantify shifts using cosine distance or Euclidean distance between word embeddings to evaluate how much influence the overrepresented corpus exerts on the underrepresented one.
+#### Visualization
+- Visualize clustering and semantic shifts in embeddings to identify bias transfer.
+- Use embedding distance metrics (e.g., cosine distance) to quantify the influence of dominant language datasets.
 
-## 8. Interpretation and Reporting
+---
 
-- **Highlight Key Findings:** Identify terms that exhibit significant shifts, reflecting possible bias transfer or loss of cultural nuance.
-- **Contextual Analysis:** Discuss the implications of these findings in terms of how LLMs trained on dominant languages can distort or align with underrepresented language representations.
+### 3. Cross-Language Bias and Knowledge Transfer Evaluation
 
-## 9. Recommendations for Mitigation
+- **Bias Indicators**:  
+  - Observe semantic shifts for terms associated with cultural and gender biases in the Canadian Hansard.
+  - Analyze whether Inuktitut-specific terms lose their cultural integrity in multilingual models.
 
-- **Balanced Training Suggestions:** Provide recommendations for how to better balance training data to minimize bias transfer, such as through data augmentation or fine-tuning on culturally enriched corpora.
-- **Cultural Preservation Strategies:** Suggest ways to preserve cultural integrity, such as training with a focus on culturally relevant data and context-aware learning.
+- **Semantic Integrity**:  
+  - Assess if culturally significant terms maintain their unique embeddings or align more closely with English-biased terms in multilingual setups.
 
-## Timeline (6-7 Weeks)
+---
 
-- **Week 1:** Preprocess and align data; set up training environment.
-- **Weeks 2-3:** Train each model (use parallel training where possible).
-- **Week 4:** Extract embeddings and conduct initial comparisons.
-- **Weeks 5-6:** Perform in-depth analysis, visualization, and quantitative evaluations.
-- **Week 7:** Finalize analysis, document findings, and prepare for presentation.
+### 4. Recommendations
 
+- **Balanced Data Strategies**: Advocate for equal representation in training datasets to minimize bias transfer.
+- **Cultural Preservation**: Emphasize training approaches that respect linguistic and cultural nuances of underrepresented languages.
+- **Ethical NLP Practices**: Encourage transparency in dataset selection and model evaluation for fairness.
+
+---
+
+## Timeline (6–7 Weeks)
+
+1. **Week 1**: Data preprocessing and training environment setup.
+2. **Weeks 2–3**: Model training (parallel execution where feasible).
+3. **Week 4**: Extract embeddings and perform initial comparisons.
+4. **Weeks 5–6**: Conduct in-depth analysis and visualizations.
+5. **Week 7**: Finalize results, prepare documentation, and present findings.
+
+---
+
+## Tools and Frameworks
+
+- **Frameworks**: PyTorch, TensorFlow, Hugging Face Transformers.
+- **Visualization**: Matplotlib, Seaborn.
+- **Embedding Analysis**: Scikit-learn (t-SNE, PCA).
+
+---
+
+## Expected Outcomes
+
+- Identification of measurable bias transfer from English to Inuktitut in overrepresented multilingual models.
+- Insights into the role of dataset representativity in mitigating cross-linguistic bias.
+- Recommendations for equitable and ethical multilingual model development.
