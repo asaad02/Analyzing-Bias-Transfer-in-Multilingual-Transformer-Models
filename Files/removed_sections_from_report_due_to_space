@@ -1,0 +1,107 @@
+
+
+\subsection{UMAP Clustering of Word Pair Embeddings}
+We applied UMAP clustering to visualize the semantic relationships between word pairs based on their cosine similarities. Figure~\ref{fig:umap_word_pairs} illustrates how embeddings for politically charged word pairs are distributed in a reduced two-dimensional space:
+\begin{itemize}
+    \item Word pairs and their associated models are color-coded for clarity, with each point representing a unique combination.
+    \item Word pairs that are semantically similar are positioned closer together, forming distinct clusters.
+    \item The clustering highlights patterns of alignment or divergence between related terms, revealing how specific pairs are encoded in the embedding space.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/cluster-embeddings-based-on-cosine-similarity.jpg}
+    \caption{UMAP Clustering of Cosine Similarities by Pair and Model. Politically charged terms are projected into a two-dimensional space, with distinct clusters revealing semantic coherence across models.}
+    \label{fig:umap_word_pairs}
+\end{figure}
+
+
+\subsection{Cosine Similarity Distribution}
+Figure~\ref{fig:cosine_similarity_distribution} presents the distribution of cosine similarities across all models. Key observations include:
+\begin{itemize}
+    \item Models trained on imbalanced datasets exhibit broader variance in cosine similarities, with some pairs showing significant negative values.
+    \item The Balanced Multilingual Model mitigates extreme biases, though it does not fully eliminate them.
+\end{itemize}
+
+This distribution highlights the challenges of achieving unbiased embeddings and the risks of training on imbalanced datasets.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/Distribution-of-Cosine-Similarities.jpg}
+    \caption{Distribution of Cosine Similarities. The figure highlights variance across models, with imbalanced datasets showing broader spreads and extreme negative values.}
+    \label{fig:cosine_similarity_distribution}
+\end{figure}
+
+\subsection{Average Cosine Similarity by Target Word and Model}
+Figure~\ref{fig:average_cosine_similarity} compares the average cosine similarity of target words across all models. Notable observations include:
+\begin{itemize}
+    \item The \textbf{Balanced Multilingual Model} consistently outperforms the Imbalanced Multilingual Model, demonstrating better semantic alignment across culturally significant terms.
+    \item \textbf{Domain-Specific Models} (Canadian Hansard and Nunavut Hansard) achieve coherent representations within their respective domains but exhibit biases when dealing with cross-domain concepts.
+\end{itemize}
+
+These results underscore the importance of balanced training data in mitigating biases and improving semantic consistency.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/Average_Cosine_Similarity_by_Target_Word_and_Model.jpg}
+    \caption{Average Cosine Similarity by Target Word and Model. Balanced multilingual models demonstrate improved alignment of embeddings across culturally significant terms compared to imbalanced models.}
+    \label{fig:average_cosine_similarity}
+\end{figure}
+
+
+\paragraph{Discussion:}
+Our analysis revealed distinct bias patterns across the models:
+\begin{itemize}
+    \item The \textbf{Pretrained RoBERTa} model exhibited minimal bias, consistent with its general-purpose nature.
+    \item The \textbf{Canadian Hansard} model displayed a slight bias due to its focus on anglophone parliamentary discourse.
+    \item The \textbf{Nunavut Hansard} model demonstrated increased bias, reflecting the socio-political nuances of Indigenous contexts.
+    \item The \textbf{Imbalanced Multilingual} model showed the highest bias, emphasizing the risks of data imbalance during fine-tuning.
+    \item The \textbf{Balanced Multilingual} model mitigated some bias but did not entirely eliminate it.
+\end{itemize}
+
+These results highlight the critical importance of curating and balancing datasets when fine-tuning models to achieve equitable representation, especially for underrepresented communities.
+
+\subsection{UMAP Clustering of Embedding Spaces}
+
+As part of our results, we conducted an analysis of the embedding spaces across all five models using Uniform Manifold Approximation and Projection (UMAP). This technique allows for visualizing  the high-dimensional embeddings of politically charged terms in a two-dimensional space, aiding in understanding how the models encode semantic relationships.
+
+\paragraph{Experimental Setup:}
+We utilized the following politically charged terms for this analysis:
+\begin{itemize}
+    \item \textit{Indigenous rights}, \textit{Self-determination}, \textit{Canadian sovereignty}, \textit{Climate change policy}, \textit{Reconciliation efforts}, \textit{Resource exploitation in Indigenous territories}, and \textit{Cultural preservation}.
+\end{itemize}
+Embeddings were extracted for these terms from all five models: \textit{Pretrained}, \textit{Canadian Hansard}, \textit{Nunavut Hansard}, \textit{Imbalanced Multilingual}, and \textit{Balanced Multilingual}. UMAP was applied to reduce these embeddings to two dimensions for visualization.
+
+\paragraph{Observations:}
+The UMAP visualization (Figure~\ref{fig:umap_clustering}) illustrates distinct clustering patterns:
+\begin{itemize}
+    \item \textbf{Pretrained Model:} Displays a dispersed configuration, reflecting a lack of contextual specificity for politically charged terms.
+    \item \textbf{Canadian Hansard and Nunavut Hansard Models:} Exhibit tight clusters, suggesting these models encode semantically related terms more coherently due to their domain-specific training.
+    \item \textbf{Imbalanced Multilingual Model:} Shows a scattered pattern, likely stemming from the unequal representation of Canadian and Nunavut Hansard corpora.
+    \item \textbf{Balanced Multilingual Model:} Displays moderate clustering, indicative of more balanced semantic representations compared to the imbalanced model.
+\end{itemize}
+
+\paragraph{Insights:}
+The clustering patterns highlight each model's capability to encode semantic similarity. Models fine-tuned on parliamentary data (e.g., \textit{Canadian Hansard} and \textit{Nunavut Hansard}) better capture domain-specific nuances. This visualization complements quantitative analyses, such as the WEAT scores, providing a qualitative perspective on model behavior.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/umap.png} % Adjust width to fit one column
+    \caption{UMAP Visualization of Embedding Spaces. Politically charged terms are projected into a two-dimensional space, with clustering patterns revealing the semantic coherence of embeddings in each model.}
+    \label{fig:umap_clustering}
+\end{figure}
+
+\section{Discussion}
+
+\subsubsection{Neglecting Public Health}
+
+- Jordan Principle
+- Joyce Echaquan
+
+\subsubsection{Lingering Paternalism}
+
+- Primitive and Modern Conceptions
+
+\subsubsection{Victim Blaming}
+
+- Peaceful and Violent Protests
