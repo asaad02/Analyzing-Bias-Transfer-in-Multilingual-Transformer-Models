@@ -1,4 +1,4 @@
-# COMP550-Project: Analyzing Bias Transfer in Multilingual Transformer Models
+# Analyzing Bias Transfer in Multilingual Transformer Models
 
 This project explores how biases from dominant languages (e.g., English) transfer to underrepresented languages (e.g., Inuktitut) in multilingual transformer models. Using the Canadian and Nunavut Hansard corpora, we aim to analyze cross-linguistic bias and knowledge transfer, providing insights into the ethical development of multilingual NLP systems.
 
